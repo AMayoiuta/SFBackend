@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartFlow - 社区</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        .status-bar {
+            height: 44px;
+            background-color: #000;
+            color: white;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+        .status-bar-left {
+            display: flex;
+            align-items: center;
+        }
+        .status-bar-right {
+            display: flex;
+            align-items: center;
+        }
+        .tab-bar {
+            height: 83px;
+            background-color: white;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding-bottom: 20px;
+        }
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #6B7280;
+            font-size: 10px;
+        }
+        .tab-item.active {
+            color: #4F46E5;
+        }
+        .tab-icon {
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+        .post-card {
+            background-color: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 16px;
+        }
+        .category-badge {
+            background-color: #EEF2FF;
+            color: #4F46E5;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+        .ai-badge {
+            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+            color: white;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+        .segment-control {
+            display: flex;
+            background-color: #F3F4F6;
+            border-radius: 8px;
+            padding: 2px;
+        }
+        .segment-item {
+            flex: 1;
+            text-align: center;
+            padding: 8px 0;
+            font-size: 14px;
+            border-radius: 6px;
+        }
+        .segment-item.active {
+            background-color: white;
+            color: #4F46E5;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- iOS 状态栏 -->
+    <div class="status-bar">
+        <div class="status-bar-left">
+            9:41
+        </div>
+        <div class="status-bar-right">
+            <i class="fas fa-signal mr-2"></i>
+            <i class="fas fa-wifi mr-2"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- 头部 -->
+    <div class="bg-white px-4 pt-4 pb-3 shadow-sm">
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-2xl font-bold">社区</h1>
+            <div class="flex space-x-2">
+                <button class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+                    <i class="fas fa-search text-gray-500"></i>
+                </button>
+                <button class="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center">
+                    <i class="fas fa-plus text-white"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 分段控制 -->
+        <div class="segment-control">
+            <div class="segment-item active">推荐</div>
+            <div class="segment-item">最新</div>
+            <div class="segment-item">关注</div>
+        </div>
+    </div>
+
+    <!-- 社区内容 -->
+    <div class="px-4 py-4 pb-24">
+        <!-- 置顶帖子 -->
+        <div class="post-card mb-6">
+            <div class="p-4">
+                <div class="flex justify-between items-start mb-3">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white text-sm font-medium mr-3">
+                            官方
+                        </div>
+                        <div>
+                            <div class="font-medium">SmartFlow官方</div>
+                            <div class="text-xs text-gray-500">2小时前</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-xs text-red-500 font-medium mr-2">置顶</span>
+                        <button>
+                            <i class="fas fa-ellipsis-h text-gray-400"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <h3 class="text-lg font-semibold mb-2">SmartFlow v2.0 更新公告</h3>
+                <p class="text-gray-700 mb-4">
+                    我们很高兴地宣布，SmartFlow v2.0正式发布！新版本带来了全新的AI任务拆解功能、智能日报生成和团队协作工具。立即更新体验吧！
+                </p>
+                
+                <div class="bg-gray-100 rounded-xl p-3 mb-4">
+                    <div class="flex items-center text-sm text-gray-700">
+                        <i class="fas fa-file-alt text-indigo-500 mr-2"></i>
+                        <span>查看完整更新日志</span>
+                        <i class="fas fa-chevron-right ml-auto text-gray-400 text-xs"></i>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between text-gray-500 text-sm">
+                    <div class="flex items-center">
+                        <i class="far fa-eye mr-1"></i>
+                        <span>2,345</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="far fa-comment mr-1"></i>
+                        <span>42</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="far fa-heart mr-1"></i>
+                        <span>189</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="far fa-share-square mr-1"></i>
+                        <span>分享</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 普通帖子 -->
+        <div class="post-card">
+            <div class="p-4">
+                <div class="flex justify-between items-start mb-3">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-white text-sm font-medium mr-3">
+                            ZL
+                        </div>
+                        <div>
+                            <div class="font-medium">张立</div>
+                            <div class="text-xs text-gray-500">4小时前</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="category-badge mr-2">效能提升</span>
+                        <button>
+                            <i class="fas fa-ellipsis-h text-gray-400"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <h3 class="text-lg font-semibold mb-2">分享我的任务拆解方法</h3>
+                <p class="text-gray-700 mb-4">
+                    最近一个月我一直在使用SmartFlow的AI任务拆解功能，效率提升了30%。以下是我总结的几点使用技巧和心得...
+                </p>
+                
+                <div class="grid grid-cols-2 gap-2 mb-4">
+                    <img src="https://via.placeholder.com/300x200" alt="任务拆解截图" class="rounded-lg w-full h-32 object-cover">
+                    <img src="https://via.placeholder.com/300x200" alt="效能统计截图" class="rounded-lg w-full h-32 object-cover">
+                </div>
+                
+                <div class="flex justify-between text-gray-500 text-sm">
+                    <div class="flex items-center">
+                        <i class="far fa-eye mr-1"></i>
+                        <span>456</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="far fa-comment mr-1"></i>
+                        <span>23</span>
+                    </div>
+                    <div class="flex items-center text-indigo-600">
+                        <i class="fas fa-heart mr-1"></i>
+                        <span>78</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="far fa-share-square mr-1"></i>
+                        <span>分享</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- AI生成的帖子 -->
+        <div class="post-card mt-6">
+            <div class="p-4">
+                <div class="flex justify-between items-start mb-3">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center text-white text-sm font-medium mr-3">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium">SmartFlow助手</div>
+                            <div class="text-xs text-gray-500">1天前</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="ai-badge flex items-center mr-2">
+                            <i class="fas fa-robot mr-1"></i>
+                            AI生成
+                        </span>
+                        <button>
+                            <i class="fas fa-ellipsis-h text-gray-400"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <h3 class="text-lg font-semibold mb-2">每周效能提升小贴士</h3>
+                <p class="text-gray-700 mb-4">
+                    根据您最近的使用数据，我们发现您在任务规划方面表现出色，但在时间管理上还有提升空间。以下是几点针对性建议...
+                </p>
+                
+                <div class="bg-indigo-50 rounded-xl p-4 mb-4">
+                    <div class="flex items-start mb-3">
+                        <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center mr-3 mt-1">
+                            <i class="fas fa-lightbulb text-indigo-600 text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium text-indigo-800">使用番茄工作法</div>
+                            <div class="text-sm text-indigo-700">
+                                尝试25分钟专注工作 + 5分钟休息的循环，提高专注度和工作效率
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center mr-3 mt-1">
+                            <i class="fas fa-calendar-check text-indigo-600 text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium text-indigo-800">批量处理类似任务</div>
+                            <div class="text-sm text-indigo-700">
+                                将相似的任务安排在同一时间段内处理，减少上下文切换成本
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between text-gray-500 text-sm">
+                    <div class="flex items-center">
+                        <i class="far fa-eye mr-1"></i>
+                        <span>789</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="far fa-comment mr-1"></i>
+                        <span>15</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="far fa-heart mr-1"></i>
+                        <span>56</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="far fa-share-square mr-1"></i>
+                        <span>分享</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部标签栏 -->
+    <div class="tab-bar fixed bottom-0 left-0 right-0">
+        <a href="home.html" class="tab-item">
+            <i class="tab-icon fas fa-home"></i>
+            <span>首页</span>
+        </a>
+        <a href="task_breakdown.html" class="tab-item">
+            <i class="tab-icon fas fa-tasks"></i>
+            <span>任务</span>
+        </a>
+        <a href="daily_report.html" class="tab-item">
+            <i class="tab-icon fas fa-chart-bar"></i>
+            <span>报告</span>
+        </a>
+        <a href="community.html" class="tab-item active">
+            <i class="tab-icon fas fa-users"></i>
+            <span>社区</span>
+        </a>
+        <a href="profile.html" class="tab-item">
+            <i class="tab-icon fas fa-user"></i>
+            <span>我的</span>
+        </a>
+    </div>
+</body>
+</html>

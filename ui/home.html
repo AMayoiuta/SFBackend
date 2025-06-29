@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartFlow - 主页</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        .status-bar {
+            height: 44px;
+            background-color: #000;
+            color: white;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+        .status-bar-left {
+            display: flex;
+            align-items: center;
+        }
+        .status-bar-right {
+            display: flex;
+            align-items: center;
+        }
+        .tab-bar {
+            height: 83px;
+            background-color: white;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding-bottom: 20px;
+        }
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #6B7280;
+            font-size: 10px;
+        }
+        .tab-item.active {
+            color: #4F46E5;
+        }
+        .tab-icon {
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+        .task-card {
+            border-radius: 16px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+        .priority-indicator {
+            width: 4px;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .priority-high {
+            background-color: #EF4444;
+        }
+        .priority-medium {
+            background-color: #F59E0B;
+        }
+        .priority-low {
+            background-color: #10B981;
+        }
+        .task-status {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .status-pending {
+            background-color: #E5E7EB;
+            color: #4B5563;
+        }
+        .status-in-progress {
+            background-color: #DBEAFE;
+            color: #2563EB;
+        }
+        .status-completed {
+            background-color: #D1FAE5;
+            color: #059669;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- iOS 状态栏 -->
+    <div class="status-bar">
+        <div class="status-bar-left">
+            9:41
+        </div>
+        <div class="status-bar-right">
+            <i class="fas fa-signal mr-2"></i>
+            <i class="fas fa-wifi mr-2"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- 头部 -->
+    <div class="bg-white px-4 pt-4 pb-3 shadow-sm">
+        <div class="flex justify-between items-center mb-4">
+            <div>
+                <h1 class="text-2xl font-bold">任务</h1>
+                <p class="text-gray-500 text-sm">今天，2023年11月15日</p>
+            </div>
+            <div class="flex space-x-2">
+                <button class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+                    <i class="fas fa-search text-gray-500"></i>
+                </button>
+                <button class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+                    <i class="fas fa-bell text-gray-500"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 任务分类标签 -->
+        <div class="flex space-x-2 overflow-x-auto pb-2 -mx-1 px-1">
+            <button class="px-4 py-2 bg-indigo-600 text-white rounded-full text-sm font-medium whitespace-nowrap">
+                全部
+            </button>
+            <button class="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-full text-sm font-medium whitespace-nowrap">
+                今日
+            </button>
+            <button class="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-full text-sm font-medium whitespace-nowrap">
+                待处理
+            </button>
+            <button class="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-full text-sm font-medium whitespace-nowrap">
+                进行中
+            </button>
+            <button class="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-full text-sm font-medium whitespace-nowrap">
+                已完成
+            </button>
+        </div>
+    </div>
+
+    <!-- 任务列表 -->
+    <div class="px-4 py-4 pb-24 overflow-y-auto">
+        <!-- 任务卡片 1 -->
+        <div class="task-card relative">
+            <div class="priority-indicator priority-high"></div>
+            <div class="p-4 pl-6">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-semibold text-gray-900">产品需求文档撰写</h3>
+                    <span class="task-status status-in-progress">进行中</span>
+                </div>
+                <p class="text-gray-600 text-sm mb-3 line-clamp-2">完成SmartFlow产品的功能需求文档，包括核心功能、技术需求和非功能需求部分</p>
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center">
+                        <i class="far fa-clock text-gray-400 mr-1"></i>
+                        <span class="text-gray-500 text-xs">今天 18:00</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center mr-1">
+                            <span class="text-xs text-indigo-600 font-medium">3</span>
+                        </div>
+                        <span class="text-gray-500 text-xs">子任务</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 任务卡片 2 -->
+        <div class="task-card relative">
+            <div class="priority-indicator priority-medium"></div>
+            <div class="p-4 pl-6">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-semibold text-gray-900">UI设计评审</h3>
+                    <span class="task-status status-pending">待处理</span>
+                </div>
+                <p class="text-gray-600 text-sm mb-3 line-clamp-2">与设计团队一起评审SmartFlow的UI设计方案，确保符合产品需求</p>
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center">
+                        <i class="far fa-clock text-gray-400 mr-1"></i>
+                        <span class="text-gray-500 text-xs">明天 14:30</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center mr-1">
+                            <span class="text-xs text-indigo-600 font-medium">2</span>
+                        </div>
+                        <span class="text-gray-500 text-xs">子任务</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 任务卡片 3 -->
+        <div class="task-card relative">
+            <div class="priority-indicator priority-low"></div>
+            <div class="p-4 pl-6">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-semibold text-gray-900">API接口开发</h3>
+                    <span class="task-status status-completed">已完成</span>
+                </div>
+                <p class="text-gray-600 text-sm mb-3 line-clamp-2">完成用户认证和任务管理相关的API接口开发，并进行单元测试</p>
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center">
+                        <i class="far fa-clock text-gray-400 mr-1"></i>
+                        <span class="text-gray-500 text-xs">昨天 16:00</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center mr-1">
+                            <span class="text-xs text-indigo-600 font-medium">5</span>
+                        </div>
+                        <span class="text-gray-500 text-xs">子任务</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 任务卡片 4 -->
+        <div class="task-card relative">
+            <div class="priority-indicator priority-high"></div>
+            <div class="p-4 pl-6">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-semibold text-gray-900">AI模型集成</h3>
+                    <span class="task-status status-pending">待处理</span>
+                </div>
+                <p class="text-gray-600 text-sm mb-3 line-clamp-2">将蓝心大模型API集成到任务拆解功能中，实现智能任务分解</p>
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center">
+                        <i class="far fa-clock text-gray-400 mr-1"></i>
+                        <span class="text-gray-500 text-xs">11月20日</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center mr-1">
+                            <span class="text-xs text-indigo-600 font-medium">4</span>
+                        </div>
+                        <span class="text-gray-500 text-xs">子任务</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 悬浮添加按钮 -->
+    <div class="fixed bottom-24 right-6">
+        <button class="w-14 h-14 rounded-full bg-indigo-600 text-white shadow-lg flex items-center justify-center">
+            <i class="fas fa-plus text-xl"></i>
+        </button>
+    </div>
+
+    <!-- 底部标签栏 -->
+    <div class="tab-bar fixed bottom-0 left-0 right-0">
+        <div class="tab-item active">
+            <i class="fas fa-tasks tab-icon"></i>
+            <span>任务</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-chart-line tab-icon"></i>
+            <span>报告</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-users tab-icon"></i>
+            <span>社区</span>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-user tab-icon"></i>
+            <span>我的</span>
+        </div>
+    </div>
+</body>
+</html> 

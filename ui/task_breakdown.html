@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartFlow - AI任务拆解</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        .status-bar {
+            height: 44px;
+            background-color: #000;
+            color: white;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+        .status-bar-left {
+            display: flex;
+            align-items: center;
+        }
+        .status-bar-right {
+            display: flex;
+            align-items: center;
+        }
+        .ai-gradient {
+            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+        }
+        .subtask-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .drag-handle {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9CA3AF;
+        }
+        .subtask-order {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: #EEF2FF;
+            color: #4F46E5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- iOS 状态栏 -->
+    <div class="status-bar">
+        <div class="status-bar-left">
+            9:41
+        </div>
+        <div class="status-bar-right">
+            <i class="fas fa-signal mr-2"></i>
+            <i class="fas fa-wifi mr-2"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+    </div>
+
+    <!-- 头部导航 -->
+    <div class="bg-white px-4 py-4 shadow-sm">
+        <div class="flex items-center">
+            <button class="mr-4">
+                <i class="fas fa-arrow-left text-gray-700"></i>
+            </button>
+            <h1 class="text-xl font-bold">AI任务拆解</h1>
+            <button class="ml-auto bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                保存
+            </button>
+        </div>
+    </div>
+
+    <!-- AI拆解内容 -->
+    <div class="p-4 pb-24">
+        <!-- 主任务信息 -->
+        <div class="bg-white rounded-2xl p-5 shadow-sm mb-6">
+            <h2 class="text-xl font-bold text-gray-900 mb-2">产品需求文档撰写</h2>
+            <p class="text-gray-600 mb-4">
+                完成SmartFlow产品的功能需求文档，包括核心功能、技术需求和非功能需求部分
+            </p>
+            <div class="flex justify-between items-center text-sm">
+                <div class="flex items-center">
+                    <i class="far fa-clock text-gray-400 mr-1"></i>
+                    <span class="text-gray-500">截止: 今天 18:00</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="far fa-hourglass text-gray-400 mr-1"></i>
+                    <span class="text-gray-500">预计: 120分钟</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- AI拆解结果 -->
+        <div class="mb-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold">AI拆解结果</h3>
+                <div class="flex items-center text-indigo-600 text-sm">
+                    <i class="fas fa-magic mr-1"></i>
+                    <span>由AI生成</span>
+                </div>
+            </div>
+            
+            <!-- 子任务列表 -->
+            <div>
+                <!-- 子任务1 -->
+                <div class="subtask-card">
+                    <div class="flex items-center mb-3">
+                        <div class="subtask-order mr-3">1</div>
+                        <div class="flex-1">
+                            <h4 class="font-medium">撰写核心功能需求章节</h4>
+                        </div>
+                        <div class="drag-handle">
+                            <i class="fas fa-grip-lines"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-3">
+                        详细描述用户账户管理、任务管理系统、任务执行与追踪、智能报告生成和社交功能等核心功能
+                    </p>
+                    <div class="flex justify-between items-center text-xs text-gray-500">
+                        <span>预计: 45分钟</span>
+                        <button class="text-indigo-600">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 子任务2 -->
+                <div class="subtask-card">
+                    <div class="flex items-center mb-3">
+                        <div class="subtask-order mr-3">2</div>
+                        <div class="flex-1">
+                            <h4 class="font-medium">撰写技术需求章节</h4>
+                        </div>
+                        <div class="drag-handle">
+                            <i class="fas fa-grip-lines"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-3">
+                        描述AI技术集成和系统架构相关的技术需求，包括后端API和移动端应用的技术要点
+                    </p>
+                    <div class="flex justify-between items-center text-xs text-gray-500">
+                        <span>预计: 30分钟</span>
+                        <button class="text-indigo-600">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 子任务3 -->
+                <div class="subtask-card">
+                    <div class="flex items-center mb-3">
+                        <div class="subtask-order mr-3">3</div>
+                        <div class="flex-1">
+                            <h4 class="font-medium">撰写非功能需求章节</h4>
+                        </div>
+                        <div class="drag-handle">
+                            <i class="fas fa-grip-lines"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-3">
+                        详述性能、安全性、可靠性和可扩展性等非功能需求，确保产品质量和用户体验
+                    </p>
+                    <div class="flex justify-between items-center text-xs text-gray-500">
+                        <span>预计: 25分钟</span>
+                        <button class="text-indigo-600">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 子任务4 -->
+                <div class="subtask-card">
+                    <div class="flex items-center mb-3">
+                        <div class="subtask-order mr-3">4</div>
+                        <div class="flex-1">
+                            <h4 class="font-medium">制定实施阶段计划</h4>
+                        </div>
+                        <div class="drag-handle">
+                            <i class="fas fa-grip-lines"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-3">
+                        规划MVP和后续迭代阶段的功能实现顺序和优先级，确保开发工作有序进行
+                    </p>
+                    <div class="flex justify-between items-center text-xs text-gray-500">
+                        <span>预计: 20分钟</span>
+                        <button class="text-indigo-600">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 添加子任务按钮 -->
+        <button class="w-full py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-500 flex items-center justify-center">
+            <i class="fas fa-plus mr-2"></i>
+            添加子任务
+        </button>
+        
+        <!-- AI分析 -->
+        <div class="mt-6 bg-white rounded-2xl p-5 shadow-sm">
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 rounded-full ai-gradient flex items-center justify-center mr-3">
+                    <i class="fas fa-robot text-white"></i>
+                </div>
+                <h3 class="text-lg font-semibold">AI分析</h3>
+            </div>
+            
+            <div class="mb-4">
+                <h4 class="font-medium mb-2">任务复杂度</h4>
+                <div class="flex items-center">
+                    <div class="flex-1 h-2 bg-gray-200 rounded-full mr-2">
+                        <div class="h-full ai-gradient rounded-full" style="width: 70%"></div>
+                    </div>
+                    <span class="text-sm font-medium">中高</span>
+                </div>
+            </div>
+            
+            <div class="mb-4">
+                <h4 class="font-medium mb-2">建议</h4>
+                <p class="text-gray-600 text-sm">
+                    建议按照拆解顺序执行子任务，先完成核心功能需求章节，再进行技术需求和非功能需求的撰写。可以在每个子任务完成后进行短暂休息，提高工作效率。
+                </p>
+            </div>
+            
+            <div>
+                <h4 class="font-medium mb-2">优化提示</h4>
+                <p class="text-gray-600 text-sm">
+                    考虑使用思维导图工具辅助整理文档结构，可以提高20%的工作效率。建议在安静环境下完成写作，减少干扰。
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
