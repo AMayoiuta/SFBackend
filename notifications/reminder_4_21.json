@@ -1,0 +1,11 @@
+{
+  "id": 4,
+  "user_id": 21,
+  "username": "testuser_4wohq0",
+  "type": "reminder",
+  "task_title": "已更新的集成测试任务",
+  "message": "已更新的集成测试提醒",
+  "reminder_time": "2025-07-05T11:39:00.858028",
+  "created_at": "2025-07-05T13:39:11.223402",
+  "status": "sent"
+}

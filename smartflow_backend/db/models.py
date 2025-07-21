@@ -4,7 +4,7 @@ import enum
 import datetime
 from typing import List
 
-from db.base import Base
+from smartflow_backend.db.base import Base
 
 
 class TaskPriority(str, enum.Enum):
@@ -55,6 +55,9 @@ class Task(Base):
     estimated_duration = Column(Integer, nullable=True)  # 预计持续时间(分钟)
     importance_score = Column(Float, default=0.0)
     
+    # 添加完成时间字段
+    completed_at = Column(DateTime, nullable=True)
+    
     # 关系
     owner_id = Column(Integer, ForeignKey("user.id"))
     owner = relationship("User", back_populates="tasks")
@@ -94,21 +97,34 @@ class Reminder(Base):
     message = Column(String(255), nullable=False)
     is_sent = Column(Boolean, default=False)
     priority = Column(Integer, default=1)  # 提醒优先级
+    strategy = Column(String(20), default="single")  # 提醒策略
+    status = Column(String(20), default="pending")  # 提醒状态：pending, sent, cancelled
     
     # 关系
     task_id = Column(Integer, ForeignKey("task.id"))
     task = relationship("Task", back_populates="reminders")
+    user_id = Column(Integer, ForeignKey("user.id"))
+    user = relationship("User")
 
 
 class DailyReport(Base):
     """每日智能日报"""
-    date = Column(DateTime, default=datetime.datetime.utcnow)
+    # 修改字段名称，与reports.py中保持一致
+    report_date = Column(DateTime, default=datetime.datetime.utcnow)
+    report_type = Column(String(20), default="daily")  # 报告类型：daily, weekly, monthly
     summary = Column(Text, nullable=True)
     progress_analysis = Column(Text, nullable=True)
     deviation_analysis = Column(Text, nullable=True)
     optimization_suggestions = Column(Text, nullable=True)
+    ai_insights = Column(Text, nullable=True)  # 添加AI洞察字段
+    next_steps = Column(Text, nullable=True)  # 添加下一步行动计划字段
     tasks_completed = Column(Integer, default=0)
     tasks_pending = Column(Integer, default=0)
+    total_time_spent = Column(Integer, default=0)  # 添加总用时字段
+    avg_task_duration = Column(Float, default=0.0)  # 添加平均任务用时字段
+    top_tasks = Column(Text, nullable=True)  # 存储为JSON字符串
+    report_data = Column(Text, nullable=True)  # 添加原始数据字段
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)  # 添加创建时间字段
     
     # 关系
     user_id = Column(Integer, ForeignKey("user.id"))
@@ -120,10 +136,17 @@ class ChatMessage(Base):
     content = Column(Text, nullable=False)
     message_type = Column(String(20), default="text")  # text, image, task_share
     is_system = Column(Boolean, default=False)  # 系统消息还是用户消息
+    anonymous = Column(Boolean, default=False)  # 是否匿名发送
     
     # 关系
     user_id = Column(Integer, ForeignKey("user.id"), nullable=True)  # 允许匿名消息
     user = relationship("User", back_populates="chat_messages")
     
     # 如果是任务分享
-    shared_task_id = Column(Integer, ForeignKey("task.id"), nullable=True) 
+    shared_task_id = Column(Integer, ForeignKey("task.id"), nullable=True)
+    # 如果是报告分享
+    shared_report_id = Column(Integer, ForeignKey("dailyreport.id"), nullable=True)
+    
+    # 时间戳
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow) 
